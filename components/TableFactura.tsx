@@ -148,7 +148,7 @@ const FacturasTable = ({  }) => {
                                 {factura.fecha.toLocaleString()}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {factura.total}
+                                ${factura.total}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <button
