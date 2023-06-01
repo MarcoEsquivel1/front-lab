@@ -59,5 +59,15 @@ export default class ApiLabService {
         return res;
     }
 
+    static async updateDetalle(iddetalle: number, producto: string, cantidad: number, subtotal: number, idfactura: number) {
+        const res2 = await apiLab.put("/detalles/" + iddetalle, {
+            producto: producto,
+            cantidad: cantidad,
+            subtotal: subtotal
+        });
+        const res = this.getAllDetalles(idfactura);
+        return res;
+    }
+
 }
 

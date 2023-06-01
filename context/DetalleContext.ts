@@ -7,6 +7,7 @@ export interface DetalleContextInterface{
     detalles: Detalle[];
     getDetalles: (id: number) => Promise<void>;
     postDetalle: (facturaid: number, producto: string, cantidad: number, subtotal: number) => Promise<void>;
+    updateDetalle: (iddetalle: number, producto: string, cantidad: number, subtotal: number, idfactura: number) => Promise<void>;
 }
 
 export const DetalleContext: StateCreator<DetalleContextInterface> = (set) => ({
@@ -17,6 +18,10 @@ export const DetalleContext: StateCreator<DetalleContextInterface> = (set) => ({
     },
     postDetalle: async (facturaid: number, producto: string, cantidad: number, subtotal: number) => {
         const res = await ApiLabService.postDetalle(facturaid, producto, cantidad, subtotal);
+        set({ detalles: res });
+    },
+    updateDetalle: async (iddetalle: number, producto: string, cantidad: number, subtotal: number, idfactura: number) => {
+        const res = await ApiLabService.updateDetalle(iddetalle, producto, cantidad, subtotal, idfactura);
         set({ detalles: res });
     }
 });

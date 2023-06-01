@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 export default function DetailsPage({params}) {
-    const { detalles, getDetalles, postDetalle } = useAppStore();
+    const { detalles, getDetalles, postDetalle, updateDetalle } = useAppStore();
     const router = useRouter();
 
     const [lDetalles, setlDetalles] = React.useState<Detalle[]>(detalles);
@@ -53,11 +53,11 @@ export default function DetailsPage({params}) {
     };
 
     const editarDetalle = () => {
-        // if (nombre.trim() === '' || direccion.trim() === '' || dui.trim() === '' || fecha.trim() === '' || total === '') {
-        //     setError(true);
-        //     return;
-        // }
-        // updateFactura(FacturaEdit.idfactura, nombre, direccion, dui, fecha, total);
+        if(producto.trim() === '' || cantidad === '' || subtotal === '') {
+            setError(true);
+            return;
+        }
+        updateDetalle(DetalleEdit.iddetalle, producto, cantidad, subtotal, params.slug);
         closeEditHandler();
     };
 
@@ -149,7 +149,7 @@ export default function DetailsPage({params}) {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <button
                                     onClick={() => {
-                                        
+                                        setDetalleEdit(detalle);
                                         editHandler();
                                     }}
                                     className="text-indigo-600 hover:text-indigo-900"
