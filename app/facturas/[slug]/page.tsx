@@ -1,6 +1,6 @@
 "use client"
 import { Detalle, Factura } from "@/interfaces";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { useAppStore } from "@/context/store";
@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 export default function DetailsPage({params}) {
-    const { detalles, getDetalles, postDetalle, updateDetalle, deleteDetalle } = useAppStore();
+    const { detalles, getDetalles, postDetalle, updateDetalle, deleteDetalle, facturas, getFacturas } = useAppStore();
     const router = useRouter();
 
     const [lDetalles, setlDetalles] = React.useState<Detalle[]>(detalles);
@@ -25,7 +25,12 @@ export default function DetailsPage({params}) {
     const [edit, setEdit] = React.useState(false);
     const [deleteM, setDeleteM] = React.useState(false);
 
-    const handler = () => setVisible(true);
+    const handler = () => {
+        if(existeFactura(params.slug) == true) {
+            setVisible(true);
+        }
+    };
+    
     const editHandler = () => {
         setEdit(true)
     };
@@ -66,9 +71,27 @@ export default function DetailsPage({params}) {
         closeDeleteHandler();
     };
 
+    const existeFactura = (idfactura: number) => {
+        let existe = false;
+        console.log(facturas);
+        facturas.forEach((factura) => {
+            if(factura.idfactura == idfactura) {
+                existe = true;
+            }
+        });
+        return existe;
+    };
+
     useEffect(() => {
-        getDetalles(params.slug);
+        getFacturas();
     }, []);
+
+    useEffect(() => {
+        if(existeFactura(params.slug) == true) {
+            console.log(existeFactura(params.slug));
+            getDetalles(params.slug);
+        }
+    }, [facturas]);
     
     useEffect(() => {
         setlDetalles(detalles);
