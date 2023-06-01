@@ -1,4 +1,4 @@
-import { Table } from "../../components";
+import { TableFactura } from "../../components";
 
 export default function FacturasPage() {
     return (
@@ -12,7 +12,7 @@ export default function FacturasPage() {
                     </p>
                 </div>
             </div>
-            <Table />
+            <TableFactura />
         </main>   
     )
 };

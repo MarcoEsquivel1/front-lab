@@ -1,11 +1,13 @@
 'use client';  
 import React, { useState, useEffect, use } from "react";
-import { Modal, Button, Text, Input, Row, Checkbox, Grid } from "@nextui-org/react";
+import { Modal, Button, Text, Input, Grid } from "@nextui-org/react";
 import { useAppStore } from "@/context/store";
 import { Factura } from "../interfaces/index"
+import { useRouter } from "next/navigation";
 
 const FacturasTable = ({  }) => {
     const { facturas, getFacturas, postFactura, updateFactura, deleteFactura } = useAppStore();
+    const router = useRouter();
 
     const [lFacturas, setlFacturas] = useState<Factura[]>([]);
     const [FacturaEdit, setFacturaEdit] = useState<Factura>({} as Factura);
@@ -165,6 +167,14 @@ const FacturasTable = ({  }) => {
                                     className="text-red-600 hover:text-red-900 ml-2"
                                 >
                                     Eliminar
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        router.push(`/facturas/${factura.idfactura}`);
+                                    }}
+                                    className="text-green-600 hover:text-green-900 ml-2"
+                                >
+                                    Ver detalles 
                                 </button>
                             </td>
                         </tr>
