@@ -69,5 +69,11 @@ export default class ApiLabService {
         return res;
     }
 
+    static async deleteDetalle(iddetalle: number, idfactura: number) {
+        const res2 = await apiLab.delete("/detalles/" + iddetalle);
+        const res = this.getAllDetalles(idfactura);
+        return res;
+    }
+
 }
 

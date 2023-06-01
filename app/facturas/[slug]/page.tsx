@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 export default function DetailsPage({params}) {
-    const { detalles, getDetalles, postDetalle, updateDetalle } = useAppStore();
+    const { detalles, getDetalles, postDetalle, updateDetalle, deleteDetalle } = useAppStore();
     const router = useRouter();
 
     const [lDetalles, setlDetalles] = React.useState<Detalle[]>(detalles);
@@ -62,7 +62,7 @@ export default function DetailsPage({params}) {
     };
 
     const eliminarDetalle = () => {
-        // deleteFactura(FacturaDelete.idfactura);
+        deleteDetalle(DetalleDelete.iddetalle, params.slug);
         closeDeleteHandler();
     };
 
@@ -158,7 +158,7 @@ export default function DetailsPage({params}) {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        
+                                        setDetalleDelete(detalle);
                                         deleteHandler();
                                     }}
                                     className="text-red-600 hover:text-red-900 ml-2"
