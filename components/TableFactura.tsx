@@ -4,6 +4,7 @@ import { Modal, Button, Text, Input, Grid } from "@nextui-org/react";
 import { useAppStore } from "@/context/store";
 import { Factura } from "../interfaces/index"
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const FacturasTable = ({  }) => {
     const { facturas, getFacturas, postFactura, updateFactura, deleteFactura } = useAppStore();
@@ -168,14 +169,11 @@ const FacturasTable = ({  }) => {
                                 >
                                     Eliminar
                                 </button>
-                                <button
-                                    onClick={() => {
-                                        router.push(`/facturas/${factura.idfactura}`);
-                                    }}
+                                <Link href={{ pathname: `/facturas/${factura.idfactura}`}}
                                     className="text-green-600 hover:text-green-900 ml-2"
                                 >
                                     Ver detalles 
-                                </button>
+                                </Link>
                             </td>
                         </tr>
                     ))}

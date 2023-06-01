@@ -11,3 +11,15 @@ export interface Factura {
 export interface FacturasList {
     facturas: Factura[];
 }
+
+export interface Detalle {
+    cantidad:  number;
+    facturaid: number;
+    iddetalle: number;
+    producto:  string;
+    subtotal:  number;
+}
+
+export interface DetallesList {
+    detalles: Detalle[];
+}

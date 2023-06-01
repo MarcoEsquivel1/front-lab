@@ -43,5 +43,10 @@ export default class ApiLabService {
         return res;
     }
 
+    static async getAllDetalles() {
+        const res = await apiLab.get("/detalles");
+        return res.data;
+    }
+
 }
 
