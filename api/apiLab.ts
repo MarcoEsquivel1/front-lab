@@ -48,5 +48,16 @@ export default class ApiLabService {
         return res.data;
     }
 
+    static async postDetalle(facturaid: number, producto: string, cantidad: number, subtotal: number) {
+        const res2 = await apiLab.post("/detalles", {
+            facturaid: facturaid,
+            producto: producto,
+            cantidad: cantidad,
+            subtotal: subtotal
+        });
+        const res = this.getAllDetalles(facturaid);
+        return res;
+    }
+
 }
 

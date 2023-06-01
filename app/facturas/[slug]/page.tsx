@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 export default function DetailsPage({params}) {
-    const { detalles, getDetalles } = useAppStore();
+    const { detalles, getDetalles, postDetalle } = useAppStore();
     const router = useRouter();
 
     const [lDetalles, setlDetalles] = React.useState<Detalle[]>(detalles);
@@ -44,11 +44,11 @@ export default function DetailsPage({params}) {
     };
 
     const agregarDetalle = () => {
-        // if (nombre.trim() === '' || direccion.trim() === '' || dui.trim() === '' || fecha.trim() === '' || total.trim() === '') {
-        //     setError(true);
-        //     return;
-        // }
-        // postFactura(nombre, direccion, dui, fecha, total);
+        if(producto.trim() === '' || cantidad.trim() === '' || subtotal.trim() === '') {
+            setError(true);
+            return;
+        }
+        postDetalle(params.slug, producto, cantidad, subtotal);
         closeHandler();
     };
 
